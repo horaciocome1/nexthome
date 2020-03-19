@@ -2,12 +2,16 @@ package io.github.horaciocome1.nexthome.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import io.github.horaciocome1.nexthome.R
 import io.github.horaciocome1.nexthome.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
@@ -24,6 +28,16 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         initUI()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navigated = NavigationUI.onNavDestinationSelected(item, navController)
+        return navigated || super.onOptionsItemSelected(item)
+    }
+
     private fun initUI() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -37,10 +51,13 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        if (destination.id == R.id.destination_start)
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        else
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setDisplayHomeAsUp(destinationId = destination.id)
+    }
+
+    private fun setDisplayHomeAsUp(destinationId: Int) = when (destinationId) {
+        R.id.destination_start -> supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        R.id.destination_profile -> supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        else -> supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
 }

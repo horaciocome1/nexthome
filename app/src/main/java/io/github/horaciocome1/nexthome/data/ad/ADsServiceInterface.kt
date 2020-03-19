@@ -1,6 +1,6 @@
 package io.github.horaciocome1.nexthome.data.ad
 
-import io.github.horaciocome1.nexthome.data.ad.AD
+import io.github.horaciocome1.nexthome.data.profile.Proprietario
 
 interface ADsServiceInterface {
 

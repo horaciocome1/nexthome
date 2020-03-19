@@ -8,7 +8,7 @@ import io.github.horaciocome1.nexthome.data.ad.AD
 import io.github.horaciocome1.nexthome.databinding.ItemAdBinding
 
 class ADsAdapter(
-    private val onClickListener: View.OnClickListener
+    private val onClickListener: (view: View, adId: String) -> Unit
 ) : RecyclerView.Adapter<ADsAdapter.MyViewHolder>() {
 
     var ads = mutableListOf<AD>()
@@ -29,24 +29,28 @@ class ADsAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ad = ads[position]
-        var description = "${ad.quartos}x Quartos; "
-        if (ad.suites > 0)
-            description += "${ad.suites}x Suites; "
-        if (ad.wcs > 0)
-            description += "${ad.wcs}x WCs; "
-        description += "\n"
-        if (ad.hasAgua)
-            description += "Com água canalizada; "
-        if (ad.hasLuz)
-            description += "Tem luz; "
-        if (ad.isMobilada)
-            description += "Está mobilada"
         binding.nomeProprietarioTextView.text = ad.proprietario.name
-        binding.descriptionTextView.text = description
+        binding.descriptionTextView.text = ad.buildADDescription()
         binding.zonaTextView.text = ad.zona
         binding.openADButton.text = ad.price.toString()
-        binding.openADButton.setOnClickListener(onClickListener)
+        binding.openADButton.setOnClickListener { onClickListener(it, ad.id) }
 
+    }
+
+    private fun AD.buildADDescription(): String {
+        var description = "${quartos}x Quartos; "
+        if (suites > 0)
+            description += "${suites}x Suites; "
+        if (wcs > 0)
+            description += "${wcs}x WCs; "
+        description += "\n"
+        if (hasAgua)
+            description += "Com água canalizada; "
+        if (hasLuz)
+            description += "Tem luz; "
+        if (isMobilada)
+            description += "Está mobilada"
+        return description
     }
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)

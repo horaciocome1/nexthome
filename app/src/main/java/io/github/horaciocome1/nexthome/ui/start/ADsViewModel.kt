@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import io.github.horaciocome1.nexthome.data.ad.AD
 import io.github.horaciocome1.nexthome.data.ad.ADsService
 import io.github.horaciocome1.nexthome.data.zonas.ZonasService
+import io.github.horaciocome1.nexthome.util.navigate
 
 class ADsViewModel : ViewModel() {
 
@@ -27,10 +28,12 @@ class ADsViewModel : ViewModel() {
     suspend fun retrieveZonas(): ArrayList<String> =
         zonasService.retrieveZonas()
 
-    fun navigateToCreateAD(view: View) {
-        val directions = StartFragmentDirections.actionOpenCreateAd()
-        view.findNavController()
-            .navigate(directions)
-    }
+    fun navigateToAD(view: View, adId: String) =
+        StartFragmentDirections.actionOpenAd(adId)
+            .navigate(view)
+
+    fun navigateToCreateAD(view: View) =
+        StartFragmentDirections.actionOpenCreateAd()
+            .navigate(view)
 
 }

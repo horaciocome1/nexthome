@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NextHome.iml" filepath="$PROJECT_DIR$/NextHome.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NextHome.iml" filepath="$PROJECT_DIR$/NextHome.iml" group="NextHome" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="NextHome/app" />
     </modules>
   </component>
 </project>

@@ -15,7 +15,7 @@ import io.github.horaciocome1.nexthome.databinding.ListBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 
-class SavedFragment : Fragment(), View.OnClickListener {
+class SavedFragment : Fragment() {
 
     private val viewModel: ADsViewModel by lazy {
         ViewModelProvider(this)[ADsViewModel::class.java]
@@ -23,7 +23,9 @@ class SavedFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: ListBinding
 
-    private val aDsAdapter: ADsAdapter by lazy { ADsAdapter(this) }
+    private val aDsAdapter: ADsAdapter by lazy {
+        ADsAdapter { view, adId -> viewModel.navigateToAD(view, adId) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,9 +40,6 @@ class SavedFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         initUI()
         setDataToAdapter()
-    }
-
-    override fun onClick(view: View) {
     }
 
     private fun setDataToAdapter() = lifecycleScope.launchWhenStarted {

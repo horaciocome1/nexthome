@@ -44,6 +44,8 @@
         <item name="iconTint">@color/colorOnSecondary</item>
         <item name="rippleColor">@color/colorSecondaryDark</item>
         <item name="elevation">@dimen/elevation_button</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="android:padding">16dp</item>
     </style>
     <style name="Widget.MyApp.Button.Unelevated" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="backgroundTint">@color/colorSecondary</item>

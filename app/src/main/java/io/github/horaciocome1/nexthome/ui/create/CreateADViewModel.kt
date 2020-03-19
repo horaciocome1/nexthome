@@ -7,7 +7,7 @@ import io.github.horaciocome1.nexthome.data.zonas.ZonasService
 
 class CreateADViewModel : ViewModel() {
 
-    val ad = AD()
+    val ad: AD = AD()
 
     private val aDsService: ADsService by lazy { ADsService() }
 
