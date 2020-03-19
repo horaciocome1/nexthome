@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="ad"
+            type="io.github.horaciocome1.nexthome.data.ad.AD" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MyApp.CardView"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="@dimen/spacing_card_margin"
+        android:layout_marginEnd="4dp"
+        app:cardElevation="@dimen/elevation_cardview"
+        app:rippleColor="@color/colorPrimaryLight">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/spacing_card_padding_start"
+            android:paddingTop="@dimen/spacing_card_padding_top"
+            android:paddingEnd="@dimen/spacing_card_padding_end"
+            android:paddingBottom="@dimen/spacing_card_padding_bottom">
+
+            <TextView
+                android:id="@+id/nomeProprietarioTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:lineSpacingExtra="@dimen/text_line_spacing_ad_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="@dimen/text_line_spacing_ad_description"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nomeProprietarioTextView" />
+
+            <TextView
+                android:id="@+id/zonaTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/roboto_light"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/openADButton"
+                style="@style/Widget.MyApp.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/colorTextPrice"
+                app:icon="@drawable/outline_arrow_forward_24"
+                app:iconTint="@color/colorTextPrice"
+                app:layout_constraintBottom_toTopOf="@+id/zonaTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
+                app:strokeColor="@color/colorTextPrice" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

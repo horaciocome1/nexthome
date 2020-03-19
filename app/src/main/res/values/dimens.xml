@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ELEVATION -->
+    <dimen name="elevation_toolbar">4dp</dimen>
+    <dimen name="elevation_tablayout">4dp</dimen>
+    <dimen name="elevation_cardview">2dp</dimen>
+    <dimen name="elevation_button">2dp</dimen>
+
+    <!-- SPACING  -->
+    <dimen name="spacing_card_margin">8dp</dimen>
+    <dimen name="spacing_card_padding_start">16dp</dimen>
+    <dimen name="spacing_card_padding_top">32dp</dimen>
+    <dimen name="spacing_card_padding_end">16dp</dimen>
+    <dimen name="spacing_card_padding_bottom">32dp</dimen>
+    <dimen name="text_line_spacing_ad_description">8sp</dimen>
+    <dimen name="text_line_spacing_ad_title">8sp</dimen>
+    <dimen name="spacing_ad_description_margin_top">8dp</dimen>
+    <dimen name="spacing_price_margin_top">12dp</dimen>
+    <dimen name="spacing_price_margin_bottom">12dp</dimen>
+    <dimen name="spacing_price_margin_end">12dp</dimen>
+
+    <!-- WIDTH -->
+    <dimen name="width_outlinedbutton_stroke">1dp</dimen>
+    <dimen name="width_iconbutton">38dp</dimen>
+
+    <!-- HEIGHT -->
+    <dimen name="height_iconbutton">38dp</dimen>
+
+    <!-- RADIUS -->
+    <dimen name="default_corner_radius">16dp</dimen>
+
+</resources>

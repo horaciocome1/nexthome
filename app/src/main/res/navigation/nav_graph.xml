@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/destination_start">
+
+    <fragment
+        android:id="@+id/destination_start"
+        android:name="io.github.horaciocome1.nexthome.ui.start.StartFragment"
+        android:label="@string/ads"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_open_ad"
+            app:destination="@id/destination_ad"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_open_create_ad"
+            app:destination="@id/destination_create_ad"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_ad"
+        android:name="io.github.horaciocome1.nexthome.ui.ad.ADFragment"
+        android:label="@string/ad_details"
+        tools:layout="@layout/fragment_a_d" >
+        <argument
+            android:name="ad_id"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_create_ad"
+        android:name="io.github.horaciocome1.nexthome.ui.create.CreateADFragment"
+        android:label="@string/create"
+        tools:layout="@layout/fragment_create_a_d" />
+
+</navigation>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.create.CreateADFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MyApp.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/rentingRadioButton"
+            android:orientation="horizontal"
+            android:layout_margin="32dp">
+
+            <RadioButton
+                android:id="@+id/rentingRadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/renting"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/sellingRadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/selling"
+                android:layout_weight="1"/>
+
+        </RadioGroup>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
