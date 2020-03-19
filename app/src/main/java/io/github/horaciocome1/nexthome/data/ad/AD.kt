@@ -1,5 +1,7 @@
 package io.github.horaciocome1.nexthome.data.ad
 
+import io.github.horaciocome1.nexthome.data.profile.Proprietario
+
 data class AD(
     var id: String = "",
     var quartos: Int = 2,
@@ -11,5 +13,7 @@ data class AD(
     var hasAgua: Boolean = true,
     var hasLuz: Boolean = true,
     var type: String = ADsService.AD_TYPE_RENTING,
-    var proprietario: Proprietario = Proprietario(name = "José Imobiliária")
+    var proprietario: Proprietario = Proprietario(
+        name = "José Imobiliária"
+    )
 )

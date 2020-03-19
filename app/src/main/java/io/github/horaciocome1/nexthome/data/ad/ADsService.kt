@@ -1,5 +1,7 @@
 package io.github.horaciocome1.nexthome.data.ad
 
+import io.github.horaciocome1.nexthome.data.profile.Proprietario
+
 class ADsService : ADsServiceInterface {
 
     private val ads = arrayListOf(
@@ -41,7 +43,7 @@ class ADsService : ADsServiceInterface {
     }
 
     override suspend fun isADSaved(adId: String): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override suspend fun saveAD(ad: AD): Boolean {
@@ -50,6 +52,10 @@ class ADsService : ADsServiceInterface {
 
     override suspend fun unSaveAD(adId: String): Boolean {
         TODO("Not yet implemented")
+    }
+
+    override fun amITheOwnerOfThisAD(proprietario: Proprietario): Boolean {
+        return true
     }
 
     override suspend fun deleteAD(adId: String): Boolean {

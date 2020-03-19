@@ -14,6 +14,15 @@
     <color name="colorSurface">#eceff1</color>
     <color name="colorOnSurface">#212121</color>
 
+    <color name="colorWhatsappBrand">#25d366</color>
+    <color name="colorOnWhatsappBrand">#000000</color>
+
+    <color name="colorSave">#ffd600</color>
+    <color name="colorOnSave">#000000</color>
+
+    <color name="colorDelete">#f44336</color>
+    <color name="colorOnDelete">#000000</color>
+
     <color name="colorText">#000000</color>
     <color name="colorTextPrice">#6a1b9a</color>
 

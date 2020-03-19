@@ -27,7 +27,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
         ViewModelProvider(this)[CreateADViewModel::class.java]
     }
 
-    private val snackbar: Snackbar by lazy {
+    private val snackBar: Snackbar by lazy {
         Snackbar.make(binding.root, "", Snackbar.LENGTH_INDEFINITE)
     }
 
@@ -76,7 +76,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
     }
 
     private fun initUI() {
-        snackbar.dismiss()
+        snackBar.dismiss()
         setQuartosSeekBarProgress(progress = viewModel.ad.quartos)
         setSuitesSeekBarProgress(progress = viewModel.ad.suites)
         setWCsSeekBarProgress(progress = viewModel.ad.wcs)
@@ -133,7 +133,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
 
     private fun createAD() = lifecycleScope.launchWhenStarted {
         binding.publicarMaterialButton.visibility = View.GONE
-        snackbar.setTextAndShow(message = "Publicando eu anúncio . . . ")
+        snackBar.setTextAndShow(message = "Publicando eu anúncio . . . ")
         val isADCreated = viewModel.createAD()
         if (isADCreated) {
             binding.publicarMaterialButton.findNavController()
@@ -141,7 +141,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
             return@launchWhenStarted
         }
         binding.publicarMaterialButton.visibility = View.VISIBLE
-        snackbar.setTextAndShow(message = "Não foi possível publicar, tente mais tarde!")
+        snackBar.setTextAndShow(message = "Não foi possível publicar, tente mais tarde!")
     }
 
     private fun Snackbar.setTextAndShow(message: CharSequence) = setText(message)
@@ -154,7 +154,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
 
 
     private fun onPublicarButtonClicked() {
-        snackbar.dismiss()
+        snackBar.dismiss()
         if (checkSeekBar() && checkPrice()) createAD()
         else binding.include5.priceTextInputLayout.error = "O campo não foi preenchido corretamente!"
     }

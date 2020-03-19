@@ -1,6 +1,5 @@
 package io.github.horaciocome1.nexthome.ui.start
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,7 @@ import io.github.horaciocome1.nexthome.databinding.ListBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 
-class SellingFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
+class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private val viewModel: ADsViewModel by lazy {
         ViewModelProvider(this)[ADsViewModel::class.java]
@@ -27,7 +26,9 @@ class SellingFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSele
 
     private lateinit var binding: ListBinding
 
-    private val aDsAdapter: ADsAdapter by lazy { ADsAdapter(this) }
+    private val aDsAdapter: ADsAdapter by lazy {
+        ADsAdapter { view, adId -> viewModel.navigateToAD(view, adId) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,8 +54,6 @@ class SellingFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSele
         }
     }
 
-    override fun onClick(view: View) { }
-
     private fun setDataToAdapter() = lifecycleScope.launchWhenStarted {
         val ads = viewModel.retrieveSellingADs()
         aDsAdapter.ads = ads
@@ -69,8 +68,8 @@ class SellingFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSele
     private fun initZonasSpinner() = lifecycleScope.launchWhenStarted {
         val zonas = viewModel.retrieveZonas()
         context?.let {
-            val adapter = ArrayAdapter(it, R.layout.simple_spinner_dropdown_item, zonas)
-            adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+            val adapter = ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, zonas)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.zonasSpinner.adapter = adapter
         }
         binding.zonasSpinner.onItemSelectedListener = this@SellingFragment
