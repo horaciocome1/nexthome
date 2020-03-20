@@ -1,13 +1,42 @@
 package io.github.horaciocome1.nexthome.data.profile
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import io.github.horaciocome1.nexthome.util.toObjectAsync
+import kotlinx.coroutines.tasks.await
+
 class ProfileService : ProfileInterface {
 
-    override suspend fun retrieveProfile(): Proprietario {
-        return Proprietario(name = "AK Mobiliária")
+    private val firestore: FirebaseFirestore by lazy {
+        FirebaseFirestore.getInstance()
     }
 
-    override suspend fun updateProfile(proprietario: Proprietario): Boolean {
-        TODO("Not yet implemented")
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
+    private val ownerProfileReference: DocumentReference by lazy {
+        firestore.collection(COLLECTION_OWNERS)
+            .document(auth.currentUser!!.uid)
+    }
+
+    override suspend fun retrieveProfile(): Owner? = try {
+        ownerProfileReference.get()
+            .await()
+            .toObjectAsync()
+    } catch (exception: Exception) { null }
+
+    override suspend fun updateProfile(owner: Owner): Boolean = try {
+        ownerProfileReference.set(owner)
+            .await()
+        true
+    } catch (exception: Exception) { false }
+
+    companion object {
+
+        private const val COLLECTION_OWNERS = "owners"
+
     }
 
 }

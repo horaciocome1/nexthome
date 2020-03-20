@@ -16,13 +16,13 @@ class ADsViewModel : ViewModel() {
 
     var selectedZona: String = ""
 
-    suspend fun retrieveRentingADs(): ArrayList<AD> =
+    suspend fun retrieveRentingADs(): List<AD> =
         aDsService.retrieveRentingADs(zona = selectedZona)
 
-    suspend fun retrieveSellingADs(): ArrayList<AD> =
+    suspend fun retrieveSellingADs(): List<AD> =
         aDsService.retrieveSellingADs(zona = selectedZona)
 
-    suspend fun retrieveSavedADs(): ArrayList<AD> =
+    suspend fun retrieveSavedADs(): List<AD> =
         aDsService.retrieveSavedADs()
 
     suspend fun retrieveZonas(): ArrayList<String> =

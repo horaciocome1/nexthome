@@ -5,6 +5,6 @@ interface ZonasInterface {
     /**
      * responsible for retrieving a list of available zonas
      */
-    suspend fun retrieveZonas(): ArrayList<String>
+    suspend fun retrieveZonas(): List<String>
 
 }

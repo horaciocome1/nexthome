@@ -11,7 +11,7 @@ class ADsAdapter(
     private val onClickListener: (view: View, adId: String) -> Unit
 ) : RecyclerView.Adapter<ADsAdapter.MyViewHolder>() {
 
-    var ads = mutableListOf<AD>()
+    var ads = listOf<AD>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,7 +29,7 @@ class ADsAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ad = ads[position]
-        binding.nomeProprietarioTextView.text = ad.proprietario.name
+        binding.nomeProprietarioTextView.text = ad.owner.name
         binding.descriptionTextView.text = ad.buildADDescription()
         binding.zonaTextView.text = ad.zona
         binding.openADButton.text = ad.price.toString()
