@@ -28,7 +28,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
     }
 
     private val snackBar: Snackbar by lazy {
-        Snackbar.make(binding.root, "", Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(binding.scrollView, "", Snackbar.LENGTH_INDEFINITE)
     }
 
     private val toast: Toast by lazy {

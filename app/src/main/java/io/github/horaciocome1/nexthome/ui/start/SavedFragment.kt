@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.nexthome.databinding.ListBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
@@ -25,6 +26,10 @@ class SavedFragment : Fragment() {
 
     private val aDsAdapter: ADsAdapter by lazy {
         ADsAdapter { view, adId -> viewModel.navigateToAD(view, adId) }
+    }
+
+    private val snackbar: Snackbar by lazy {
+        Snackbar.make(binding.root, "", Snackbar.LENGTH_INDEFINITE)
     }
 
     override fun onCreateView(
@@ -43,9 +48,15 @@ class SavedFragment : Fragment() {
     }
 
     private fun setDataToAdapter() = lifecycleScope.launchWhenStarted {
-            val ads = viewModel.retrieveSavedADs()
-            aDsAdapter.ads = ads
-        }
+        snackbar.setText("Por favor espere . . .")
+            .show()
+        val ads = viewModel.retrieveSavedADs()
+        aDsAdapter.ads = ads
+        if (ads.isEmpty()) {
+            val message = "Não foi possível encontrar anúncios. Tente novamente mais tarde"
+            snackbar.setText(message)
+        } else snackbar.dismiss()
+    }
 
     private fun initUI() {
         binding.zonasSpinner.visibility = View.GONE
