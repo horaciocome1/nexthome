@@ -4,8 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.horaciocome1.nexthome.data.profile.ProfileService
-import io.github.horaciocome1.nexthome.data.profile.Proprietario
-import kotlinx.coroutines.CoroutineScope
+import io.github.horaciocome1.nexthome.data.profile.Owner
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
@@ -20,12 +19,12 @@ class ProfileViewModel : ViewModel() {
 
     suspend fun retrieveProfile(context: CoroutineContext) = withContext(context) {
         val proprietario = service.retrieveProfile()
-        name.value = proprietario.name
-        cellPhone.value = proprietario.cellPhone.toString()
+        name.value = proprietario?.name
+        cellPhone.value = proprietario?.cellPhone.toString()
     }
 
     fun updateProfile() = viewModelScope.launch {
-        val proprietario = Proprietario()
+        val proprietario = Owner()
         name.value?.let { proprietario.name = it.toString() }
         cellPhone.value?.toString()
             ?.toIntOrNull()

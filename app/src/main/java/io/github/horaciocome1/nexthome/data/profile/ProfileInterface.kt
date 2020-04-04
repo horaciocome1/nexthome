@@ -5,11 +5,11 @@ interface ProfileInterface {
     /**
      * function that returns data for logged proprietário
      */
-    suspend fun retrieveProfile(): Proprietario
+    suspend fun retrieveProfile(): Owner?
 
     /**
      * function that updates proprietário data in the database
      */
-    suspend fun updateProfile(proprietario: Proprietario): Boolean
+    suspend fun updateProfile(owner: Owner): Boolean
 
 }

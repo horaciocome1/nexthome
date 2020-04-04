@@ -11,7 +11,7 @@ class ADsAdapter(
     private val onClickListener: (view: View, adId: String) -> Unit
 ) : RecyclerView.Adapter<ADsAdapter.MyViewHolder>() {
 
-    var ads = mutableListOf<AD>()
+    var ads = listOf<AD>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,26 +29,26 @@ class ADsAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ad = ads[position]
-        binding.nomeProprietarioTextView.text = ad.proprietario.name
+        binding.nomeProprietarioTextView.text = ad.owner.name
         binding.descriptionTextView.text = ad.buildADDescription()
-        binding.zonaTextView.text = ad.zona
+        binding.zonaTextView.text = ad.hood
         binding.openADButton.text = ad.price.toString()
         binding.openADButton.setOnClickListener { onClickListener(it, ad.id) }
 
     }
 
     private fun AD.buildADDescription(): String {
-        var description = "${quartos}x Quartos; "
+        var description = "${rooms}x Quartos; "
         if (suites > 0)
             description += "${suites}x Suites; "
         if (wcs > 0)
             description += "${wcs}x WCs; "
         description += "\n"
-        if (hasAgua)
+        if (hasWater)
             description += "Com água canalizada; "
-        if (hasLuz)
+        if (hasLight)
             description += "Tem luz; "
-        if (isMobilada)
+        if (hasFurniture)
             description += "Está mobilada"
         return description
     }

@@ -12,7 +12,9 @@ class ADViewModel : ViewModel() {
 
     var ad: AD = AD()
 
-    suspend fun retrieveAD(adId: String) = viewModelScope.launch { ad = service.retrieveAD(adId) }
+    suspend fun retrieveAD(adId: String) = viewModelScope.launch {
+        service.retrieveAD(adId)?.let { ad = it }
+    }
 
     suspend fun isADSaved() = service.isADSaved(adId = ad.id)
 
@@ -20,8 +22,7 @@ class ADViewModel : ViewModel() {
 
     suspend fun unSaveAD() = service.unSaveAD(adId = ad.id)
 
-    fun amITheOwnerOfThisAD() =
-        service.amITheOwnerOfThisAD(proprietario = ad.proprietario)
+    fun amITheOwnerOfThisAD() = service.amITheOwnerOfThisAD(owner = ad.owner)
 
     suspend fun deleteAD() = service.deleteAD(adId = ad.id)
 

@@ -1,71 +1,120 @@
 package io.github.horaciocome1.nexthome.data.ad
 
-import io.github.horaciocome1.nexthome.data.profile.Proprietario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.*
+import io.github.horaciocome1.nexthome.util.toObjectsAsync
+import io.github.horaciocome1.nexthome.data.profile.Owner
+import io.github.horaciocome1.nexthome.util.toObjectAsync
+import kotlinx.coroutines.tasks.await
 
 class ADsService : ADsServiceInterface {
 
-    private val ads = arrayListOf(
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte"),
-        AD(zona = "Belo Horionte")
-    )
-
-    override suspend fun createAD(ad: AD): Boolean {
-        TODO("Not yet implemented")
+    private val firestore: FirebaseFirestore by lazy {
+        FirebaseFirestore.getInstance()
     }
 
-    override suspend fun retrieveRentingADs(zona: String): ArrayList<AD> {
-        return ads
+    private val auth: FirebaseAuth by lazy {
+        FirebaseAuth.getInstance()
     }
 
-    override suspend fun retrieveSellingADs(zona: String): ArrayList<AD> {
-        return ads
+    private val adsCollection: CollectionReference by lazy {
+        firestore.collection(COLLECTION_ADS)
     }
 
-    override suspend fun retrieveSavedADs(): ArrayList<AD> {
-        return ads
+    private val savedASsCollection: CollectionReference by lazy {
+        firestore.collection(COLLECTION_OWNERS)
+            .document(auth.currentUser!!.uid)
+            .collection(COLLECTION_ADS)
     }
 
-    override suspend fun retrieveAD(adId: String): AD {
-        return AD(zona = "Machava Socimol")
+    override suspend fun createAD(ad: AD): Boolean = try {
+        ad.id = adsCollection.document().id
+        adsCollection.add(ad)
+            .await()
+        true
+    } catch (exception: FirebaseFirestoreException) { false }
+
+    override suspend fun retrieveRentingADs(hood: String): List<AD> = try {
+        adsCollection.whereEqualTo(FIELD_AD_TYPE, AD_TYPE_RENTING)
+            .whereEqualTo(FIELD_HOOD, hood)
+            .orderBy(FIELD_CREATED_AT, Query.Direction.DESCENDING)
+            .get()
+            .await()
+            .toObjectsAsync()
+    } catch (exception: FirebaseFirestoreException) { listOf() }
+
+    override suspend fun retrieveSellingADs(zona: String): List<AD> = try {
+        adsCollection.whereEqualTo(FIELD_AD_TYPE, AD_TYPE_SELLING)
+            .whereEqualTo(FIELD_HOOD, zona)
+            .orderBy(FIELD_CREATED_AT, Query.Direction.DESCENDING)
+            .get()
+            .await()
+            .toObjectsAsync()
+    } catch (exception: FirebaseFirestoreException) { listOf() }
+
+    override suspend fun retrieveSavedADs(): List<AD> = try {
+        savedASsCollection.orderBy(FIELD_CREATED_AT, Query.Direction.DESCENDING)
+            .get()
+            .await()
+            .toObjectsAsync()
+    } catch (exception: Exception) { listOf() }
+
+    override suspend fun retrieveAD(adId: String): AD? = try {
+        adsCollection.document(adId)
+            .get()
+            .await()
+            .toObjectAsync()
+    } catch (exception: FirebaseFirestoreException) { null }
+
+    override suspend fun isADSaved(adId: String): Boolean = try {
+        savedASsCollection.document(adId)
+            .get()
+            .await()
+            .exists()
+    } catch (exception: Exception) { false }
+
+    override suspend fun saveAD(ad: AD): Boolean = try {
+        savedASsCollection.document(ad.id)
+            .set(ad)
+            .await()
+        true
+    } catch (exception: FirebaseFirestoreException) { false }
+
+    override suspend fun unSaveAD(adId: String): Boolean = try {
+        savedASsCollection.document(adId)
+            .delete()
+            .await()
+        true
+    } catch (exception: FirebaseFirestoreException) { false }
+
+    override fun amITheOwnerOfThisAD(owner: Owner): Boolean {
+        return owner.id == auth.currentUser?.uid
     }
 
-    override suspend fun isADSaved(adId: String): Boolean {
-        return true
-    }
-
-    override suspend fun saveAD(ad: AD): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun unSaveAD(adId: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun amITheOwnerOfThisAD(proprietario: Proprietario): Boolean {
-        return true
-    }
-
-    override suspend fun deleteAD(adId: String): Boolean {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteAD(adId: String): Boolean = try {
+        val batch = firestore.batch()
+        firestore.collectionGroup(COLLECTION_ADS)
+            .whereEqualTo(FIELD_ID, adId)
+            .get()
+            .await()
+            .forEach { batch.delete(it.reference) }
+        batch.commit()
+            .await()
+        true
+    } catch (exception: FirebaseFirestoreException) { false }
 
     companion object {
 
         const val AD_TYPE_RENTING = "RENTING"
         const val AD_TYPE_SELLING = "SELLING"
+
+        private const val COLLECTION_ADS = "ads"
+        private const val COLLECTION_OWNERS = "owners"
+
+        private const val FIELD_AD_TYPE = "type"
+        private const val FIELD_HOOD = "hood"
+        private const val FIELD_CREATED_AT = "createdAt"
+        private const val FIELD_ID = "id"
 
     }
 

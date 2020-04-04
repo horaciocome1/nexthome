@@ -1,19 +1,19 @@
 package io.github.horaciocome1.nexthome.data.ad
 
-import io.github.horaciocome1.nexthome.data.profile.Proprietario
+import com.google.firebase.Timestamp
+import io.github.horaciocome1.nexthome.data.profile.Owner
 
 data class AD(
     var id: String = "",
-    var quartos: Int = 2,
-    var suites: Int = 1,
+    var rooms: Int = 1,
+    var suites: Int = 0,
     var wcs: Int = 1,
-    var zona: String = "",
-    var price: Int = 1000000,
-    var isMobilada: Boolean = true,
-    var hasAgua: Boolean = true,
-    var hasLuz: Boolean = true,
+    var hood: String = "",
+    var price: Int = 0,
+    var createdAt: Timestamp = Timestamp.now(),
+    var hasFurniture: Boolean = false,
+    var hasWater: Boolean = false,
+    var hasLight: Boolean = false,
     var type: String = ADsService.AD_TYPE_RENTING,
-    var proprietario: Proprietario = Proprietario(
-        name = "José Imobiliária"
-    )
+    var owner: Owner = Owner()
 )

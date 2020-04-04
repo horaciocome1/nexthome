@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "922719803030",
+    "firebase_url": "https://nexthome1.firebaseio.com",
+    "project_id": "nexthome1",
+    "storage_bucket": "nexthome1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922719803030:android:724568ed142d7360f3d4b7",
+        "android_client_info": {
+          "package_name": "io.github.horaciocome1.nexthome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922719803030-8ch3pi9ev7cuuop1ht6i7a641j3mev3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.horaciocome1.nexthome",
+            "certificate_hash": "56a3a65bc51c33989d1e7127a220667df2701171"
+          }
+        },
+        {
+          "client_id": "922719803030-nq5a6a1k9f55tlqqai9k0hgkoe7q1uoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe1SkxfIlxfXS8hV5vCicoGR6TQKs3Ctk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922719803030-nq5a6a1k9f55tlqqai9k0hgkoe7q1uoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

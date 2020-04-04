@@ -1,6 +1,6 @@
 package io.github.horaciocome1.nexthome.data.ad
 
-import io.github.horaciocome1.nexthome.data.profile.Proprietario
+import io.github.horaciocome1.nexthome.data.profile.Owner
 
 interface ADsServiceInterface {
 
@@ -12,22 +12,22 @@ interface ADsServiceInterface {
     /**
      * function that retrieves all ADs available for renting in passed @param zona
      */
-    suspend fun retrieveRentingADs(zona: String): ArrayList<AD>
+    suspend fun retrieveRentingADs(zona: String): List<AD>
 
     /**
      * function that retrieves all ADs available for selling in passed @param zona
      */
-    suspend fun retrieveSellingADs(zona: String): ArrayList<AD>
+    suspend fun retrieveSellingADs(zona: String): List<AD>
 
     /**
      * function that retrieves all ADs saved by the user
      */
-    suspend fun retrieveSavedADs(): ArrayList<AD>
+    suspend fun retrieveSavedADs(): List<AD>
 
     /**
      * function that returns the AD corresponding to the specified @param adId
      */
-    suspend fun retrieveAD(adId: String): AD
+    suspend fun retrieveAD(adId: String): AD?
 
     /**
      * function that tells if the AD is saved (true) or not (false) by the user
@@ -49,7 +49,7 @@ interface ADsServiceInterface {
     /**
      * function that tells whether the AD is owned by the logged user or not
      */
-    fun amITheOwnerOfThisAD(proprietario: Proprietario): Boolean
+    fun amITheOwnerOfThisAD(owner: Owner): Boolean
 
     /**
      * function that deletes from database the AD corresponding to the specified @param adId

@@ -45,7 +45,12 @@
     <dialog
         android:id="@+id/destination_profile"
         android:name="io.github.horaciocome1.nexthome.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Perfil"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/destination_sign_in"
+        android:name="io.github.horaciocome1.nexthome.ui.auth.SignInFragment"
+        android:label="Sign In"
+        tools:layout="@layout/fragment_sign_in" />
 
 </navigation>

@@ -28,7 +28,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
     }
 
     private val snackBar: Snackbar by lazy {
-        Snackbar.make(binding.root, "", Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(binding.scrollView, "", Snackbar.LENGTH_INDEFINITE)
     }
 
     private val toast: Toast by lazy {
@@ -72,20 +72,20 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
     override fun onNothingSelected(parent: AdapterView<*>?) { }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if (view is TextView) viewModel.ad.zona = view.text.toString()
+        if (view is TextView) viewModel.ad.hood = view.text.toString()
     }
 
     private fun initUI() {
         snackBar.dismiss()
-        setQuartosSeekBarProgress(progress = viewModel.ad.quartos)
+        setQuartosSeekBarProgress(progress = viewModel.ad.rooms)
         setSuitesSeekBarProgress(progress = viewModel.ad.suites)
         setWCsSeekBarProgress(progress = viewModel.ad.wcs)
         binding.include2.quartosSeekBar.setOnSeekBarChangeListener(this)
         binding.include2.suitesSeekBar.setOnSeekBarChangeListener(this)
         binding.include2.wcsSeekBar.setOnSeekBarChangeListener(this)
-        binding.include4.aguaCheckBox.isChecked = viewModel.ad.hasAgua
-        binding.include4.luzCheckBox.isChecked = viewModel.ad.hasLuz
-        binding.include4.mobiladaCheckBox.isChecked = viewModel.ad.isMobilada
+        binding.include4.aguaCheckBox.isChecked = viewModel.ad.hasWater
+        binding.include4.luzCheckBox.isChecked = viewModel.ad.hasLight
+        binding.include4.mobiladaCheckBox.isChecked = viewModel.ad.hasFurniture
         binding.publicarMaterialButton.setOnClickListener(this)
         initZonasSpinner()
     }
@@ -114,7 +114,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
     }
 
     private fun setQuartosSeekBarProgress(progress: Int) {
-        viewModel.ad.quartos = progress
+        viewModel.ad.rooms = progress
         binding.include2.quartosSeekBar.progress = progress
         binding.include2.quartosTextView.text = "${progress}x Quartos"
     }

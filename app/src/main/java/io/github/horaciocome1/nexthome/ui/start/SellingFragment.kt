@@ -8,15 +8,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.nexthome.databinding.ListBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.withContext
 
 class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -28,6 +25,10 @@ class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private val aDsAdapter: ADsAdapter by lazy {
         ADsAdapter { view, adId -> viewModel.navigateToAD(view, adId) }
+    }
+
+    private val snackbar: Snackbar by lazy {
+        Snackbar.make(binding.root, "", Snackbar.LENGTH_INDEFINITE)
     }
 
     override fun onCreateView(
@@ -49,14 +50,20 @@ class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (view is TextView) {
-            viewModel.selectedZona = view.text.toString()
+            viewModel.selectedHood = view.text.toString()
             setDataToAdapter()
         }
     }
 
     private fun setDataToAdapter() = lifecycleScope.launchWhenStarted {
+        snackbar.setText("Por favor espere . . .")
+            .show()
         val ads = viewModel.retrieveSellingADs()
         aDsAdapter.ads = ads
+        if (ads.isEmpty()) {
+            val message = "Não foi possível encontrar anúncios. Tente novamente mais tarde"
+            snackbar.setText(message)
+        } else snackbar.dismiss()
     }
 
     private fun initUI() {
@@ -66,7 +73,7 @@ class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun initZonasSpinner() = lifecycleScope.launchWhenStarted {
-        val zonas = viewModel.retrieveZonas()
+        val zonas = viewModel.retrieveHoods()
         context?.let {
             val adapter = ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, zonas)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

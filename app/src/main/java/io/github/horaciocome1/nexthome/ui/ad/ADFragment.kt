@@ -60,10 +60,10 @@ class ADFragment : Fragment() {
     }
     private fun setDataToUI(adId: String) = lifecycleScope.launchWhenStarted {
         viewModel.retrieveAD(adId)
-        binding.include.nomeProprietarioTextView.text = viewModel.ad.proprietario.name
+        binding.include.nomeProprietarioTextView.text = viewModel.ad.owner.name
         binding.include.descriptionTextView.text = viewModel.ad.buildADDescription()
         binding.include.openADButton.text = viewModel.ad.price.toString()
-        binding.include.zonaTextView.text = viewModel.ad.zona
+        binding.include.zonaTextView.text = viewModel.ad.hood
     }
 
     private fun checkOwnerShip() = lifecycleScope.launchWhenCreated {
@@ -81,32 +81,32 @@ class ADFragment : Fragment() {
         .show()
 
     private fun AD.buildADDescription(): String {
-        var description = "${quartos}x Quartos; "
+        var description = "${rooms}x Quartos; "
         if (suites > 0)
             description += "${suites}x Suites; "
         if (wcs > 0)
             description += "${wcs}x WCs; "
         description += "\n"
-        if (hasAgua)
+        if (hasWater)
             description += "Com água canalizada; "
-        if (hasLuz)
+        if (hasLight)
             description += "Tem luz; "
-        if (isMobilada)
+        if (hasFurniture)
             description += "Está mobilada"
         return description
     }
 
     private fun callOwner() {
-        val uri = "tel:${viewModel.ad.proprietario.cellPhone}".trim()
+        val uri = "tel:${viewModel.ad.owner.cellPhone}".trim()
         val intent = Intent(Intent.ACTION_DIAL).apply { data = Uri.parse(uri) }
         startActivity(intent)
     }
 
     private fun askForPhotos() {
-        val message = "Olá, ${viewModel.ad.proprietario.name}!\n" +
+        val message = "Olá, ${viewModel.ad.owner.name}!\n" +
                 "Vi o seu anúncio no NextHome, pode partilhar comigo as fotos da casa?\n\n" +
                 viewModel.ad.buildADDescription()
-        val uri = "smsto:${viewModel.ad.proprietario.cellPhone}".trim()
+        val uri = "smsto:${viewModel.ad.owner.cellPhone}".trim()
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             putExtra("sms_body", message)
             data = Uri.parse(uri)
