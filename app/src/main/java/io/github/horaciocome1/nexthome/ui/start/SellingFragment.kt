@@ -8,16 +8,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.nexthome.databinding.ListBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.withContext
 
 class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -54,7 +50,7 @@ class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (view is TextView) {
-            viewModel.selectedZona = view.text.toString()
+            viewModel.selectedHood = view.text.toString()
             setDataToAdapter()
         }
     }
@@ -77,7 +73,7 @@ class SellingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun initZonasSpinner() = lifecycleScope.launchWhenStarted {
-        val zonas = viewModel.retrieveZonas()
+        val zonas = viewModel.retrieveHoods()
         context?.let {
             val adapter = ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, zonas)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

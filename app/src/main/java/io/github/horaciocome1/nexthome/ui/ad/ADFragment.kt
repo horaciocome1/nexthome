@@ -63,7 +63,7 @@ class ADFragment : Fragment() {
         binding.include.nomeProprietarioTextView.text = viewModel.ad.owner.name
         binding.include.descriptionTextView.text = viewModel.ad.buildADDescription()
         binding.include.openADButton.text = viewModel.ad.price.toString()
-        binding.include.zonaTextView.text = viewModel.ad.zona
+        binding.include.zonaTextView.text = viewModel.ad.hood
     }
 
     private fun checkOwnerShip() = lifecycleScope.launchWhenCreated {
@@ -81,17 +81,17 @@ class ADFragment : Fragment() {
         .show()
 
     private fun AD.buildADDescription(): String {
-        var description = "${quartos}x Quartos; "
+        var description = "${rooms}x Quartos; "
         if (suites > 0)
             description += "${suites}x Suites; "
         if (wcs > 0)
             description += "${wcs}x WCs; "
         description += "\n"
-        if (hasAgua)
+        if (hasWater)
             description += "Com água canalizada; "
-        if (hasLuz)
+        if (hasLight)
             description += "Tem luz; "
-        if (isMobilada)
+        if (hasFurniture)
             description += "Está mobilada"
         return description
     }

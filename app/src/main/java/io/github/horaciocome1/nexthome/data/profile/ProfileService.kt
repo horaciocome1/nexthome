@@ -28,6 +28,7 @@ class ProfileService : ProfileInterface {
     } catch (exception: Exception) { null }
 
     override suspend fun updateProfile(owner: Owner): Boolean = try {
+        owner.id = ownerProfileReference.id
         ownerProfileReference.set(owner)
             .await()
         true

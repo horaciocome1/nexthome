@@ -28,14 +28,15 @@ class ADsService : ADsServiceInterface {
     }
 
     override suspend fun createAD(ad: AD): Boolean = try {
+        ad.id = adsCollection.document().id
         adsCollection.add(ad)
             .await()
         true
     } catch (exception: FirebaseFirestoreException) { false }
 
-    override suspend fun retrieveRentingADs(zona: String): List<AD> = try {
+    override suspend fun retrieveRentingADs(hood: String): List<AD> = try {
         adsCollection.whereEqualTo(FIELD_AD_TYPE, AD_TYPE_RENTING)
-            .whereEqualTo(FIELD_ZONA, zona)
+            .whereEqualTo(FIELD_HOOD, hood)
             .orderBy(FIELD_CREATED_AT, Query.Direction.DESCENDING)
             .get()
             .await()
@@ -44,7 +45,7 @@ class ADsService : ADsServiceInterface {
 
     override suspend fun retrieveSellingADs(zona: String): List<AD> = try {
         adsCollection.whereEqualTo(FIELD_AD_TYPE, AD_TYPE_SELLING)
-            .whereEqualTo(FIELD_ZONA, zona)
+            .whereEqualTo(FIELD_HOOD, zona)
             .orderBy(FIELD_CREATED_AT, Query.Direction.DESCENDING)
             .get()
             .await()
@@ -91,8 +92,13 @@ class ADsService : ADsServiceInterface {
     }
 
     override suspend fun deleteAD(adId: String): Boolean = try {
-        adsCollection.document(adId)
-            .delete()
+        val batch = firestore.batch()
+        firestore.collectionGroup(COLLECTION_ADS)
+            .whereEqualTo(FIELD_ID, adId)
+            .get()
+            .await()
+            .forEach { batch.delete(it.reference) }
+        batch.commit()
             .await()
         true
     } catch (exception: FirebaseFirestoreException) { false }
@@ -106,8 +112,9 @@ class ADsService : ADsServiceInterface {
         private const val COLLECTION_OWNERS = "owners"
 
         private const val FIELD_AD_TYPE = "type"
-        private const val FIELD_ZONA = "zona"
+        private const val FIELD_HOOD = "hood"
         private const val FIELD_CREATED_AT = "createdAt"
+        private const val FIELD_ID = "id"
 
     }
 

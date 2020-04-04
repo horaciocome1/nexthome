@@ -8,16 +8,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.nexthome.databinding.ListBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.withContext
 
 class RentingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -47,14 +43,14 @@ class RentingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        initZonasSpinner()
+        initHoodsSpinner()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) { }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (view is TextView) {
-            viewModel.selectedZona = view.text.toString()
+            viewModel.selectedHood = view.text.toString()
             setDataToAdapter()
         }
     }
@@ -73,13 +69,13 @@ class RentingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun initUI() {
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(SPAN_COUNT, VERTICAL)
         binding.recyclerView.adapter = aDsAdapter
-        initZonasSpinner()
+        initHoodsSpinner()
     }
 
-    private fun initZonasSpinner() = lifecycleScope.launchWhenStarted {
-        val zonas = viewModel.retrieveZonas()
+    private fun initHoodsSpinner() = lifecycleScope.launchWhenStarted {
+        val hoods = viewModel.retrieveHoods()
         context?.let {
-            val adapter = ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, zonas)
+            val adapter = ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, hoods)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.zonasSpinner.adapter = adapter
         }

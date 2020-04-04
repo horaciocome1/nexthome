@@ -22,8 +22,7 @@ class ADViewModel : ViewModel() {
 
     suspend fun unSaveAD() = service.unSaveAD(adId = ad.id)
 
-    fun amITheOwnerOfThisAD() =
-        service.amITheOwnerOfThisAD(owner = ad.owner)
+    fun amITheOwnerOfThisAD() = service.amITheOwnerOfThisAD(owner = ad.owner)
 
     suspend fun deleteAD() = service.deleteAD(adId = ad.id)
 

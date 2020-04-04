@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         else -> supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun checkAuthentication() = lifecycleScope.launchWhenStarted {
+    private fun checkAuthentication() {
         val isAuthenticationNeeded = FirebaseAuth.getInstance().currentUser == null
         if (isAuthenticationNeeded) viewModel.navigateToSignIn(controller = navController)
     }

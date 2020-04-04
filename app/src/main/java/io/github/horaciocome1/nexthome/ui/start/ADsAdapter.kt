@@ -31,24 +31,24 @@ class ADsAdapter(
         val ad = ads[position]
         binding.nomeProprietarioTextView.text = ad.owner.name
         binding.descriptionTextView.text = ad.buildADDescription()
-        binding.zonaTextView.text = ad.zona
+        binding.zonaTextView.text = ad.hood
         binding.openADButton.text = ad.price.toString()
         binding.openADButton.setOnClickListener { onClickListener(it, ad.id) }
 
     }
 
     private fun AD.buildADDescription(): String {
-        var description = "${quartos}x Quartos; "
+        var description = "${rooms}x Quartos; "
         if (suites > 0)
             description += "${suites}x Suites; "
         if (wcs > 0)
             description += "${wcs}x WCs; "
         description += "\n"
-        if (hasAgua)
+        if (hasWater)
             description += "Com água canalizada; "
-        if (hasLuz)
+        if (hasLight)
             description += "Tem luz; "
-        if (isMobilada)
+        if (hasFurniture)
             description += "Está mobilada"
         return description
     }
