@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NextHome</string>
+    <string name="app_name">nexthome</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ads">ADs</string>
@@ -8,5 +8,26 @@
     <string name="renting">Renting</string>
     <string name="selling">Selling</string>
     <string name="saved">Saved</string>
+
+    <array name="rooms">
+        <item>T1</item>
+        <item>T2</item>
+        <item>T3</item>
+        <item>T4</item>
+        <item>T5</item>
+    </array>
+
+    <array name="wcs">
+        <item>1 Casa de banho</item>
+        <item>2 Casas de banho</item>
+        <item>3 Casas de banho</item>
+    </array>
+
+    <array name="orderBy">
+        <item>Começar do mais recente</item>
+        <item>Começar do mais antigo</item>
+        <item>Começar do mais caro</item>
+        <item>Começar do menos caro</item>
+    </array>
 
 </resources>

@@ -29,27 +29,22 @@ class ADsAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val ad = ads[position]
-        binding.nomeProprietarioTextView.text = ad.owner.name
+        binding.headingTextView.text = "T${ad.rooms}"
         binding.descriptionTextView.text = ad.buildADDescription()
         binding.zonaTextView.text = ad.hood
-        binding.openADButton.text = ad.price.toString()
+        binding.priceTextView.text = ad.price.toString()
         binding.openADButton.setOnClickListener { onClickListener(it, ad.id) }
 
     }
 
     private fun AD.buildADDescription(): String {
-        var description = "${rooms}x Quartos; "
-        if (suites > 0)
-            description += "${suites}x Suites; "
-        if (wcs > 0)
-            description += "${wcs}x WCs; "
-        description += "\n"
+        var description = " + ${wcs}x WCs; \n"
         if (hasWater)
-            description += "Com água canalizada; "
+            description += " + Água canalizada \n"
         if (hasLight)
-            description += "Tem luz; "
+            description += " + Energia \n"
         if (hasFurniture)
-            description += "Está mobilada"
+            description += " + Mobília"
         return description
     }
 

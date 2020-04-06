@@ -4,34 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.create.CreateADFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.MyApp.CardView"
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/rentingRadioButton"
+        android:orientation="horizontal"
+        android:padding="32dp"
+        android:background="@drawable/shape_rounded_elements">
 
-        <RadioGroup
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/rentingRadioButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:checkedButton="@id/rentingRadioButton"
-            android:orientation="horizontal"
-            android:layout_margin="32dp">
+            android:text="@string/renting"
+            android:layout_weight="1"/>
 
-            <RadioButton
-                android:id="@+id/rentingRadioButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/renting"
-                android:layout_weight="1"/>
+        <RadioButton
+            android:id="@+id/sellingRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/selling"
+            android:layout_weight="1"/>
 
-            <RadioButton
-                android:id="@+id/sellingRadioButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/selling"
-                android:layout_weight="1"/>
-
-        </RadioGroup>
-
-    </com.google.android.material.card.MaterialCardView>
+    </RadioGroup>
 
 </layout>

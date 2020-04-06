@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#00e676</color>
-    <color name="colorPrimaryLight">#66ffa6</color>
-    <color name="colorPrimaryDark">#00b248</color>
-    <color name="colorOnPrimary">#000000</color>
+    <color name="purple">#870d4d</color>
+    <color name="purpleLight">#bb4679</color>
+    <color name="purpleDark">#550025</color>
+    <color name="onPurle">#ffffff</color>
 
-    <color name="colorSecondary">#18ffff</color>
-    <color name="colorSecondaryLight">#76ffff</color>
-    <color name="colorSecondaryDark">#00cbcc</color>
-    <color name="colorOnSecondary">#000000</color>
+    <color name="colorPrimary">@color/purpleDark</color>
+    <color name="colorPrimaryLight">@color/purpleLight</color>
+    <color name="colorPrimaryDark">@color/purpleDark</color>
+    <color name="colorOnPrimary">@color/onPurle</color>
 
-    <color name="colorSurface">#eceff1</color>
-    <color name="colorOnSurface">#212121</color>
+    <color name="colorSecondary">@color/purple</color>
+    <color name="colorSecondaryLight">@color/purpleLight</color>
+    <color name="colorSecondaryDark">@color/purpleDark</color>
+    <color name="colorOnSecondary">@color/onPurle</color>
 
-    <color name="colorWhatsappBrand">#25d366</color>
-    <color name="colorOnWhatsappBrand">#000000</color>
+    <color name="colorSurface">@color/purple</color>
+    <color name="colorOnSurface">@color/onPurle</color>
 
     <color name="colorSave">#ffd600</color>
     <color name="colorOnSave">#000000</color>
@@ -23,8 +25,9 @@
     <color name="colorDelete">#f44336</color>
     <color name="colorOnDelete">#000000</color>
 
-    <color name="colorText">#000000</color>
-    <color name="colorTextPrice">#6a1b9a</color>
+    <color name="colorText">@color/onPurle</color>
+    <color name="colorTextDark">@android:color/black</color>
+    <color name="colorTextPrice">@color/onPurle</color>
 
     <color name="tabLayoutBackgroundColor">#000a12</color>
     <color name="cardViewBackgroundColor">#ffffff</color>

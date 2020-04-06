@@ -10,10 +10,10 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import io.github.horaciocome1.nexthome.R
 import io.github.horaciocome1.nexthome.data.ad.ADsService
 import io.github.horaciocome1.nexthome.databinding.FragmentCreateADBinding
+import io.github.horaciocome1.nexthome.util.displaySnackbar
 
 /**
  * Fragment responsible for handling the creation of ADs
@@ -25,14 +25,6 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
 
     private val viewModel: CreateADViewModel by lazy {
         ViewModelProvider(this)[CreateADViewModel::class.java]
-    }
-
-    private val snackBar: Snackbar by lazy {
-        Snackbar.make(binding.scrollView, "", Snackbar.LENGTH_INDEFINITE)
-    }
-
-    private val toast: Toast by lazy {
-        Toast.makeText(context, "", Toast.LENGTH_LONG)
     }
 
     override fun onCreateView(
@@ -51,8 +43,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
 
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
         when (seekBar.id) {
-            R.id.quartosSeekBar -> setQuartosSeekBarProgress(progress)
-            R.id.suitesSeekBar -> setSuitesSeekBarProgress(progress)
+            R.id.roomsSeekBar -> setQuartosSeekBarProgress(progress)
             R.id.wcsSeekBar -> setWCsSeekBarProgress(progress)
         }
     }
@@ -63,7 +54,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.publicarMaterialButton -> onPublicarButtonClicked()
+            R.id.publicarMaterialButton -> onPublishingButtonClicked()
             R.id.rentingRadioButton -> if (view is RadioButton) onRentingRadioButtonClicked(view)
             R.id.sellingRadioButton -> if (view is RadioButton) onSellingRadioButtonClicked(view)
         }
@@ -76,18 +67,15 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
     }
 
     private fun initUI() {
-        snackBar.dismiss()
         setQuartosSeekBarProgress(progress = viewModel.ad.rooms)
-        setSuitesSeekBarProgress(progress = viewModel.ad.suites)
         setWCsSeekBarProgress(progress = viewModel.ad.wcs)
-        binding.include2.quartosSeekBar.setOnSeekBarChangeListener(this)
-        binding.include2.suitesSeekBar.setOnSeekBarChangeListener(this)
+        binding.include2.roomsSeekBar.setOnSeekBarChangeListener(this)
         binding.include2.wcsSeekBar.setOnSeekBarChangeListener(this)
-        binding.include4.aguaCheckBox.isChecked = viewModel.ad.hasWater
-        binding.include4.luzCheckBox.isChecked = viewModel.ad.hasLight
-        binding.include4.mobiladaCheckBox.isChecked = viewModel.ad.hasFurniture
+        binding.include4.waterCheckBox.isChecked = viewModel.ad.hasWater
+        binding.include4.lightCheckBox.isChecked = viewModel.ad.hasLight
+        binding.include4.furnitureCheckBox.isChecked = viewModel.ad.hasFurniture
         binding.publicarMaterialButton.setOnClickListener(this)
-        initZonasSpinner()
+        initHoodsSpinner()
     }
 
     private fun checkPrice(): Boolean {
@@ -102,12 +90,12 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
     }
 
     private fun checkSeekBar(): Boolean {
-        if (binding.include2.quartosSeekBar.progress == 0) {
-            toast.setTextAndShow(message = "A casa deve ter pelo menos 1 quarto!")
+        if (binding.include2.roomsSeekBar.progress == 0) {
+            displaySnackbar(message = "A casa deve ter pelo menos 1 quarto!")
             return false
         }
         if (binding.include2.wcsSeekBar.progress == 0) {
-            toast.setTextAndShow(message = "A casa deve ter pelo menos 1 WC!")
+            displaySnackbar(message = "A casa deve ter pelo menos 1 WC!")
             return false
         }
         return true
@@ -115,14 +103,8 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
 
     private fun setQuartosSeekBarProgress(progress: Int) {
         viewModel.ad.rooms = progress
-        binding.include2.quartosSeekBar.progress = progress
-        binding.include2.quartosTextView.text = "${progress}x Quartos"
-    }
-
-    private fun setSuitesSeekBarProgress(progress: Int) {
-        viewModel.ad.suites = progress
-        binding.include2.suitesSeekBar.progress = progress
-        binding.include2.suitesTextView.text = "${progress}x Suites"
+        binding.include2.roomsSeekBar.progress = progress
+        binding.include2.roomsTextView.text = "${progress}x Quartos"
     }
 
     private fun setWCsSeekBarProgress(progress: Int) {
@@ -133,7 +115,7 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
 
     private fun createAD() = lifecycleScope.launchWhenStarted {
         binding.publicarMaterialButton.visibility = View.GONE
-        snackBar.setTextAndShow(message = "Publicando eu anúncio . . . ")
+        displaySnackbar(message = "Publicando o anúncio . . . ")
         val isADCreated = viewModel.createAD()
         if (isADCreated) {
             binding.publicarMaterialButton.findNavController()
@@ -141,20 +123,11 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
             return@launchWhenStarted
         }
         binding.publicarMaterialButton.visibility = View.VISIBLE
-        snackBar.setTextAndShow(message = "Não foi possível publicar, tente mais tarde!")
-    }
-
-    private fun Snackbar.setTextAndShow(message: CharSequence) = setText(message)
-        .show()
-
-    private fun Toast.setTextAndShow(message: CharSequence) {
-        setText(message)
-        show()
+        displaySnackbar(message = "Não foi possível publicar, tente mais tarde!")
     }
 
 
-    private fun onPublicarButtonClicked() {
-        snackBar.dismiss()
+    private fun onPublishingButtonClicked() {
         if (checkSeekBar() && checkPrice()) createAD()
         else binding.include5.priceTextInputLayout.error = "O campo não foi preenchido corretamente!"
     }
@@ -167,14 +140,14 @@ class CreateADFragment : Fragment(), OnSeekBarChangeListener, View.OnClickListen
         if (radioButton.isChecked) viewModel.ad.type = ADsService.AD_TYPE_RENTING
     }
 
-    private fun initZonasSpinner() = lifecycleScope.launchWhenStarted {
-        val zonas = viewModel.retrieveZonas()
+    private fun initHoodsSpinner() = lifecycleScope.launchWhenStarted {
+    val hoods = viewModel.retrieveZonas()
         context?.let {
-            val adapter = ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, zonas)
+            val adapter = ArrayAdapter(it, android.R.layout.simple_spinner_dropdown_item, hoods)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.include5.zonasSpinner.adapter = adapter
+            binding.include5.hoodsSpinner.adapter = adapter
         }
-        binding.include5.zonasSpinner.onItemSelectedListener = this@CreateADFragment
+        binding.include5.hoodsSpinner.onItemSelectedListener = this@CreateADFragment
     }
 
 }

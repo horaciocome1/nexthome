@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:background="@drawable/shape_rounded_elements">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/callMaterialButton"
+            style="@style/Widget.MyApp.Button.Unelevated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Ligar"
+            android:textAlignment="textEnd"
+            app:icon="@drawable/outline_call_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/askForPhotosMaterialButton"
+            style="@style/Widget.MyApp.Button.Outlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Pedir fotos"
+            android:textAlignment="textEnd"
+            app:icon="@drawable/outline_photo_camera_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/callMaterialButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveMaterialButton"
+            style="@style/Widget.MyApp.Button.Outlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="Guardar"
+            android:textAlignment="textEnd"
+            app:icon="@drawable/outline_bookmark_border_24"
+            app:layout_constraintBottom_toTopOf="@id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/askForPhotosMaterialButton"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/unSaveMaterialButton"
+            style="@style/Widget.MyApp.Button.Outlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="Remover de guardados"
+            android:textAlignment="textEnd"
+            app:icon="@drawable/outline_bookmark_border_24"
+            app:layout_constraintBottom_toTopOf="@id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/saveMaterialButton"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteMaterialButton"
+            style="@style/Widget.MyApp.Button.Outlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="Apagar"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorDelete"
+            app:icon="@drawable/outline_delete_forever_24"
+            app:iconTint="@color/colorDelete"
+            app:layout_constraintBottom_toTopOf="@id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/unSaveMaterialButton"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="@color/colorDelete" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text='Este aplicativo é free. Para manter os gastos de manutenção baixos, a equipe decidiu que não haveria support para imagens. Pode clicar no botão "PEDIR FOTOS" para notificar o proprietário e ele lhe enviará as fotos por um meio conveniente.\nAgradecemos a compreensão! :)'
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:fontFamily="@font/roboto_light"
+            android:lineSpacingExtra="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
