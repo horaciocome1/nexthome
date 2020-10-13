@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (
+            item.itemId == R.id.destination_create_ad
+            && navController.currentDestination?.id == R.id.destination_create_ad
+        ) return true
         val navigated = NavigationUI.onNavDestinationSelected(item, navController)
         return navigated || super.onOptionsItemSelected(item)
     }
@@ -72,8 +76,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     private fun checkAuthentication() {
-        val isAuthenticationNeeded = FirebaseAuth.getInstance().currentUser == null
-        if (isAuthenticationNeeded) viewModel.navigateToSignIn(controller = navController)
+//        val isAuthenticationNeeded = FirebaseAuth.getInstance().currentUser == null
+//        if (isAuthenticationNeeded) viewModel.navigateToSignIn(controller = navController)
     }
 
     private fun setSupportActionBarVisibility(destinationId: Int) = when (destinationId) {

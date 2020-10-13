@@ -8,6 +8,14 @@
         android:icon="@drawable/outline_account_circle_24"
         android:title="Perfil"
         android:visible="true"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/destination_create_ad"
+        android:enabled="true"
+        android:icon="@drawable/outline_add_24"
+        android:title="Criar anúncio"
+        android:visible="true"
+        app:showAsAction="never" />
 
 </menu>

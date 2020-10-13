@@ -13,8 +13,6 @@
         <item name="colorSecondaryVariant">@color/colorSecondaryLight</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
 
-        <item name="android:textColor">@color/colorText</item>
-
         <item name="fontFamily">@font/roboto</item>
 
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyApp.LargeComponent</item>
@@ -24,23 +22,29 @@
         <item name="materialButtonStyle">@style/Widget.MyApp.Button.Unelevated</item>
     </style>
 
+    <!-- Toolbar theme -->
+    <style name="Widget.MyApp.Toolbar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="popupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="elevation">@dimen/elevation_toolbar</item>
+    </style>
+
     <!-- TabLayout Theme -->
     <style name="MyTheme.Widget.TabLayout" parent="MyTheme">
-        <item name="tabTextAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
-        <item name="tabTextColor">@color/colorPrimary</item>
-        <item name="tabSelectedTextColor">@color/colorPrimary</item>
-        <item name="tabIconTint">@color/colorPrimary</item>
-        <item name="tabIndicatorColor">@color/colorPrimary</item>
-        <item name="tabRippleColor">@color/colorPrimaryLight</item>
+        <item name="tabTextAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="tabTextColor">@color/colorOnPrimary</item>
+        <item name="tabSelectedTextColor">@color/colorOnPrimary</item>
+        <item name="tabIndicatorColor">@color/colorOnPrimary</item>
+        <item name="tabRippleColor">@color/colorOnPrimary</item>
         <item name="tabMode">fixed</item>
-        <item name="android:background">@color/tabLayoutBackgroundColor</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
     </style>
 
     <!-- Material Buttons Themes -->
     <style name="Widget.MyApp.Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/colorSecondary</item>
         <item name="android:textColor">@color/colorOnSecondary</item>
-        <item name="cornerRadius">@dimen/default_corner_radius</item>
+        <item name="cornerRadius">@dimen/radius_corner_default</item>
         <item name="iconTint">@color/colorOnSecondary</item>
         <item name="rippleColor">@color/colorSecondaryDark</item>
         <item name="elevation">@dimen/elevation_button</item>
@@ -50,20 +54,20 @@
     <style name="Widget.MyApp.Button.Unelevated" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="backgroundTint">@color/colorSecondary</item>
         <item name="android:textColor">@color/colorOnSecondary</item>
-        <item name="cornerRadius">@dimen/default_corner_radius</item>
+        <item name="cornerRadius">@dimen/radius_corner_default</item>
         <item name="iconTint">@color/colorOnSecondary</item>
         <item name="rippleColor">@color/colorSecondaryDark</item>
     </style>
     <style name="Widget.MyApp.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">@color/colorSecondary</item>
-        <item name="cornerRadius">@dimen/default_corner_radius</item>
+        <item name="cornerRadius">@dimen/radius_corner_default</item>
         <item name="iconTint">@color/colorSecondary</item>
         <item name="strokeColor">@color/colorSecondaryLight</item>
-        <item name="strokeWidth">@dimen/width_outlinedbutton_stroke</item>
+        <item name="strokeWidth">@dimen/width_stroke_default</item>
         <item name="rippleColor">@color/colorSecondaryDark</item>
     </style>
     <style name="Widget.MyApp.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="cornerRadius">@dimen/default_corner_radius</item>
+        <item name="cornerRadius">@dimen/radius_corner_default</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="iconTint">@color/colorSecondary</item>
         <item name="rippleColor">@color/colorSecondaryDark</item>
@@ -71,7 +75,7 @@
 
     <!-- Material Card View Theme -->
     <style name="Widget.MyApp.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">@dimen/default_corner_radius</item>
+        <item name="cardCornerRadius">@dimen/radius_corner_default</item>
         <item name="cardBackgroundColor">@color/cardViewBackgroundColor</item>
         <item name="cardElevation">@dimen/elevation_cardview</item>
     </style>
@@ -79,15 +83,15 @@
     <!-- Shape Appearance -->
     <style name="ShapeAppearance.MyApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/default_corner_radius</item>
+        <item name="cornerSize">@dimen/radius_corner_default</item>
     </style>
     <style name="ShapeAppearance.MyApp.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/default_corner_radius</item>
+        <item name="cornerSize">@dimen/radius_corner_default</item>
     </style>
     <style name="ShapeAppearance.MyApp.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/default_corner_radius</item>
+        <item name="cornerSize">@dimen/radius_corner_default</item>
     </style>
 
 </resources>

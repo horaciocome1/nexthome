@@ -10,7 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2c3b646-51f6-46cb-be4b-7b816bd1c968" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_start.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +23,7 @@
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
     <option name="PARALLEL_COMPILATION" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_29_x86" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="4100deb6e4b4a1a7" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -69,10 +70,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin File" />
         <option value="Kotlin Interface" />
         <option value="resourceFile" />
+        <option value="Kotlin File" />
         <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -81,14 +83,16 @@
   </component>
   <component name="ProjectId" id="1ZKyVpVe3XpSGvTPQOQx71wj3te" />
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="4100deb6e4b4a1a7" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-04T13:03:45.899Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/io/github/horaciocome1/nexthome/util" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
@@ -100,9 +104,10 @@
       <recent name="io.github.horaciocome1.nexthome.ui" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\horaciocome1\Projects\AndroidStudio\nexthome\app" />
       <recent name="C:\Users\horaciocome1\Projects\AndroidStudio\nexthome\app\src\main\java\io\github\horaciocome1\nexthome\util" />
       <recent name="C:\Users\horaciocome1\Projects\AndroidStudio\nexthome\app\src\main\res\drawable" />
+      <recent name="C:\Users\horaciocome1\Projects\AndroidStudio\nexthome\app\src\main\res\layout" />
+      <recent name="C:\Users\horaciocome1\Projects\AndroidStudio\nexthome\app" />
     </key>
   </component>
   <component name="RunDashboard">

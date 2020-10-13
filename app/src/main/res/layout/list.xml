@@ -13,22 +13,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.MyApp.CardView"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:text="Anúncios de casas"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="@color/colorText"
+                android:fontFamily="@font/roboto_light" />
+
+
+            <include
+                android:id="@+id/include_filter"
+                layout="@layout/layout_list_filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardBackgroundColor="@color/colorPrimaryLight">
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/zonasSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp" />
-
-            </com.google.android.material.card.MaterialCardView>
+                android:layout_marginEnd="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"

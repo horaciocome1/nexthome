@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import io.github.horaciocome1.nexthome.R
 import io.github.horaciocome1.nexthome.databinding.FragmentStartBinding
 
@@ -31,12 +36,13 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        binding.createADFloatingActionButton.setOnClickListener {
-            viewModel.navigateToCreateAD(view = it)
-        }
     }
 
     private fun initUI() {
+        initTabs()
+    }
+
+    private fun initTabs() {
         val adapter = ADsPagerAdapter(
             fragmentManager = childFragmentManager,
             pageTitles = arrayListOf(

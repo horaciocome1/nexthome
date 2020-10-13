@@ -12,12 +12,12 @@ interface ADsServiceInterface {
     /**
      * function that retrieves all ADs available for renting in passed @param zona
      */
-    suspend fun retrieveRentingADs(zona: String): List<AD>
+    suspend fun retrieveRentingADs(filter: Filter): List<AD>
 
     /**
      * function that retrieves all ADs available for selling in passed @param zona
      */
-    suspend fun retrieveSellingADs(zona: String): List<AD>
+    suspend fun retrieveSellingADs(filter: Filter): List<AD>
 
     /**
      * function that retrieves all ADs saved by the user

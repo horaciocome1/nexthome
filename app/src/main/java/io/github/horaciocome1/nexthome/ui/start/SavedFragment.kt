@@ -28,10 +28,6 @@ class SavedFragment : Fragment() {
         ADsAdapter { view, adId -> viewModel.navigateToAD(view, adId) }
     }
 
-    private val snackbar: Snackbar by lazy {
-        Snackbar.make(binding.root, "", Snackbar.LENGTH_INDEFINITE)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,20 +44,14 @@ class SavedFragment : Fragment() {
     }
 
     private fun setDataToAdapter() = lifecycleScope.launchWhenStarted {
-        snackbar.setText("Por favor espere . . .")
-            .show()
         val ads = viewModel.retrieveSavedADs()
         aDsAdapter.ads = ads
-        if (ads.isEmpty()) {
-            val message = "Não foi possível encontrar anúncios. Tente novamente mais tarde"
-            snackbar.setText(message)
-        } else snackbar.dismiss()
     }
 
     private fun initUI() {
-        binding.zonasSpinner.visibility = View.GONE
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(SPAN_COUNT, VERTICAL)
         binding.recyclerView.adapter = aDsAdapter
+        binding.includeFilter.visibility = View.GONE
     }
 
     companion object {

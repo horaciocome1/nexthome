@@ -52,57 +52,57 @@ class ADFragment : Fragment() {
     private fun initUI() {
         binding.include.openADButton.icon = null
         binding.include.openADButton.isEnabled = false
-        binding.callMaterialButton.setOnClickListener { callOwner() }
-        binding.pedirFotosMaterialButton.setOnClickListener { askForPhotos() }
-        binding.saveMaterialButton.setOnClickListener { saveAD() }
-        binding.unSaveMaterialButton.setOnClickListener { unSaveAD() }
-        binding.deleteMaterialButton.setOnClickListener { deleteAD() }
+        binding.includeActions.callMaterialButton.setOnClickListener(this::callOwner)
+        binding.includeActions.askForPhotosMaterialButton.setOnClickListener(this::askForPhotos)
+        binding.includeActions.saveMaterialButton.setOnClickListener(this::saveAD)
+        binding.includeActions.unSaveMaterialButton.setOnClickListener(this::unSaveAD)
+        binding.includeActions.deleteMaterialButton.setOnClickListener(this::deleteAD)
     }
     private fun setDataToUI(adId: String) = lifecycleScope.launchWhenStarted {
         viewModel.retrieveAD(adId)
-        binding.include.nomeProprietarioTextView.text = viewModel.ad.owner.name
+        binding.include.headingTextView.text = "T${viewModel.ad.rooms}"
         binding.include.descriptionTextView.text = viewModel.ad.buildADDescription()
-        binding.include.openADButton.text = viewModel.ad.price.toString()
+        binding.include.priceTextView.text = viewModel.ad.price.toString()
         binding.include.zonaTextView.text = viewModel.ad.hood
     }
 
     private fun checkOwnerShip() = lifecycleScope.launchWhenCreated {
         val amITheOwner = viewModel.amITheOwnerOfThisAD()
-        binding.deleteMaterialButton.visibility = if (amITheOwner) View.VISIBLE else View.GONE
+        binding.includeActions.deleteMaterialButton.visibility =
+            if (amITheOwner) View.VISIBLE else View.GONE
     }
 
     private fun checkIfADIsSaved() = lifecycleScope.launchWhenStarted {
         val isSaved = viewModel.isADSaved()
-        binding.saveMaterialButton.visibility = if (!isSaved) View.VISIBLE else View.GONE
-        binding.unSaveMaterialButton.visibility = if (isSaved) View.VISIBLE else View.GONE
+        binding.includeActions.saveMaterialButton.visibility =
+            if (!isSaved) View.VISIBLE else View.GONE
+        binding.includeActions.unSaveMaterialButton.visibility =
+            if (isSaved) View.VISIBLE else View.GONE
     }
 
     private fun Snackbar.setTextAndShow(message: CharSequence) = setText(message)
         .show()
 
     private fun AD.buildADDescription(): String {
-        var description = "${rooms}x Quartos; "
-        if (suites > 0)
-            description += "${suites}x Suites; "
-        if (wcs > 0)
-            description += "${wcs}x WCs; "
-        description += "\n"
+        var description = " + ${wcs}x WCs; \n"
         if (hasWater)
-            description += "Com água canalizada; "
+            description += " + Água canalizada \n"
         if (hasLight)
-            description += "Tem luz; "
+            description += " + Energia \n"
         if (hasFurniture)
-            description += "Está mobilada"
+            description += " + Mobília"
         return description
     }
 
-    private fun callOwner() {
+    private fun callOwner(view: View) {
+        view.isEnabled = false
         val uri = "tel:${viewModel.ad.owner.cellPhone}".trim()
         val intent = Intent(Intent.ACTION_DIAL).apply { data = Uri.parse(uri) }
         startActivity(intent)
     }
 
-    private fun askForPhotos() {
+    private fun askForPhotos(view: View) {
+        view.isEnabled = false
         val message = "Olá, ${viewModel.ad.owner.name}!\n" +
                 "Vi o seu anúncio no NextHome, pode partilhar comigo as fotos da casa?\n\n" +
                 viewModel.ad.buildADDescription()
@@ -114,22 +114,34 @@ class ADFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun saveAD() = lifecycleScope.launchWhenStarted {
-        val isSuccessful = viewModel.saveAD()
-        val message = if (isSuccessful) "Anúnio guardado!" else "Falha ao guardar anúncio!"
-        snackBar.setTextAndShow(message)
+    private fun saveAD(view: View) {
+        view.isEnabled = false
+        lifecycleScope.launchWhenStarted {
+            val isSuccessful = viewModel.saveAD()
+            val message = if (isSuccessful) "Anúnio guardado!" else "Falha ao guardar anúncio!"
+            snackBar.setTextAndShow(message)
+            view.isEnabled = true
+        }
     }
 
-    private fun unSaveAD() = lifecycleScope.launchWhenStarted {
-        val isSuccessful = viewModel.unSaveAD()
-        val message = if (isSuccessful) "Removido dos guardados!" else "Falha ao remover dos guardados!"
-        snackBar.setTextAndShow(message)
+    private fun unSaveAD(view: View) {
+        view.isEnabled = false
+        lifecycleScope.launchWhenStarted {
+            val isSuccessful = viewModel.unSaveAD()
+            val message = if (isSuccessful) "Removido dos guardados!" else "Falha ao remover dos guardados!"
+            snackBar.setTextAndShow(message)
+            view.isEnabled = true
+        }
     }
 
-    private fun deleteAD() = lifecycleScope.launchWhenStarted {
-        val isSuccessful = viewModel.deleteAD()
-        val message = if (isSuccessful) "Anúncio apagado!" else "Falha ao apagar anúncio!"
-        snackBar.setTextAndShow(message)
+    private fun deleteAD(view: View) {
+        view.isEnabled = false
+        lifecycleScope.launchWhenStarted {
+            val isSuccessful = viewModel.deleteAD()
+            val message = if (isSuccessful) "Anúncio apagado!" else "Falha ao apagar anúncio!"
+            snackBar.setTextAndShow(message)
+            view.isEnabled = true
+        }
     }
 
 }
